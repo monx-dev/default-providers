@@ -1,0 +1,18 @@
+node_modules/
+src/
+.prettierrc.js
+*.log
+CHANGELOG.md
+.dependabot/
+.github/
+*.md
+types/
+
+# config files
+release.config.js
+commitlint.config.js
+husky.config.js
+rollup.config.js
+.eslintignore
+.eslintrc.js
+tsconfig.json
