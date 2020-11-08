@@ -1,6 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import Firebase from 'firebase';
-import 'firebase/auth';
 
 import { useFirebase } from './Firebase';
 
