@@ -17,9 +17,7 @@
     "release": "semantic-release",
     "test": "yarn build"
   },
-  "dependencies": {
-    "firebase": "^8.0.1"
-  },
+  "dependencies": {},
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -30,11 +28,13 @@
     "@types/node": "^14.0.4",
     "@types/react": "^16.9.35",
     "eslint": "^7.3.1",
+    "firebase": "^8.0.1",
     "husky": "^4.2.5",
     "rimraf": "^3.0.2",
     "typescript": "^3.9.3"
   },
   "peerDependencies": {
+    "firebase": "^8.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   }

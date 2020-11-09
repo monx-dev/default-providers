@@ -1,3 +1,3 @@
-export * from './Firebase';
+export * from './firebaseAsync';
 
 export * from './Auth';

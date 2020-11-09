@@ -1,7 +1,8 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import Firebase from 'firebase';
 
-import { useFirebase } from './Firebase';
+import * as firebase from 'firebase/app';
+
+type User = firebase.default.User;
 
 interface AuthFunctions {
   loginWithGoogle: () => void;
@@ -16,7 +17,7 @@ interface Status {
   error?: Error;
 }
 
-type AuthContext = [AuthFunctions, Firebase.User | null, Status];
+type AuthContext = [AuthFunctions, User | null, Status];
 
 export const authContext = createContext<AuthContext>([{} as any, null, { loading: true }]);
 
@@ -24,13 +25,13 @@ const { Provider } = authContext;
 
 interface AuthProviderProps {
   children: React.ReactNode;
+  authAsync: () => Promise<typeof firebase.default.auth>;
 }
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<Firebase.User | null>(null);
+export const AuthProvider = ({ children, authAsync }: AuthProviderProps) => {
+  const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<Error | undefined>();
-  const [loading, setLoading] = useState(true);
-  const { auth } = useFirebase();
+  const [loading, setLoading] = useState(false);
 
   const successCall = useCallback(() => {
     setLoading(false);
@@ -47,7 +48,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setError(undefined);
   }, []);
 
-  const setToken = useCallback(async (user: Firebase.User | null) => {
+  const setToken = useCallback(async (user: User | null) => {
     if (!user) {
       document.cookie = '';
       setUser(user);
@@ -63,62 +64,79 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         document.cookie = `token=${token}`;
         setUser(user);
         setLoading(false);
-        console.log(document.cookie);
       })
       .catch(errorCall);
   }, []);
 
   useEffect(() => {
-    auth().onIdTokenChanged(setToken);
+    authAsync().then((auth) => {
+      auth().onIdTokenChanged(setToken);
 
-    auth().onAuthStateChanged(setToken);
-  }, []);
+      auth().onAuthStateChanged(setToken);
+    });
+  }, [authAsync]);
 
-  const loginWithGoogle = useCallback(() => {
+  const loginWithGoogle = useCallback(async () => {
     startCall();
+
+    const auth = await authAsync();
+
     const provider = new auth.GoogleAuthProvider();
 
     auth()
       .signInWithPopup(provider)
       .then(() => successCall())
       .catch(errorCall);
-  }, []);
+  }, [authAsync]);
 
-  const loginWithFacebook = useCallback((scopes?: string[]) => {
-    startCall();
-    const provider = new auth.FacebookAuthProvider();
+  const loginWithFacebook = useCallback(
+    async (scopes?: string[]) => {
+      startCall();
+      const auth = await authAsync();
+      const provider = new auth.FacebookAuthProvider();
 
-    if (scopes) scopes.forEach((scope) => provider.addScope(scope));
+      if (scopes) scopes.forEach((scope) => provider.addScope(scope));
 
-    auth()
-      .signInWithPopup(provider)
-      .then(() => successCall())
-      .catch(errorCall);
-  }, []);
+      auth()
+        .signInWithPopup(provider)
+        .then(() => successCall())
+        .catch(errorCall);
+    },
+    [authAsync]
+  );
 
-  const loginWithEmailAndPassword = useCallback(async (email: string, password: string) => {
-    startCall();
-    auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => successCall())
-      .catch(errorCall);
-  }, []);
+  const loginWithEmailAndPassword = useCallback(
+    async (email: string, password: string) => {
+      const auth = await authAsync();
+      startCall();
+      auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => successCall())
+        .catch(errorCall);
+    },
+    [authAsync]
+  );
 
-  const signUpWithEmailAndPassword = useCallback((email: string, password: string) => {
-    startCall();
-    auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => successCall())
-      .catch(errorCall);
-  }, []);
+  const signUpWithEmailAndPassword = useCallback(
+    async (email: string, password: string) => {
+      const auth = await authAsync();
+      startCall();
+      auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => successCall())
+        .catch(errorCall);
+    },
+    [authAsync]
+  );
 
-  const logout = useCallback(() => {
+  const logout = useCallback(async () => {
+    const auth = await authAsync();
     startCall();
     auth()
       .signOut()
       .then(() => successCall())
       .catch(errorCall);
-  }, []);
+  }, [authAsync]);
 
   return (
     <Provider
