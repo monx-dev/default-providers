@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/monx-dev/default-providers/compare/v1.0.2...v1.1.0) (2020-11-10)
+
+
+### Features
+
+* google analytics ([2ff9ef5](https://github.com/monx-dev/default-providers/commit/2ff9ef5bd533196e2c4fe02d7bf49dc0f8846dc9))
+
 ## [1.0.2](https://github.com/monx-dev/default-providers/compare/v1.0.1...v1.0.2) (2020-11-09)
 
 
