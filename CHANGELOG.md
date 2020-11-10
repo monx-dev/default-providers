@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/monx-dev/default-providers/compare/v1.0.1...v1.0.2) (2020-11-09)
+
+
+### Bug Fixes
+
+* build ([b02ce17](https://github.com/monx-dev/default-providers/commit/b02ce17c986cff3723c4003c31c208940fe40050))
+
 ## [1.0.1](https://github.com/monx-dev/default-providers/compare/v1.0.0...v1.0.1) (2020-11-08)
 
 
