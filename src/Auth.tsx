@@ -74,7 +74,7 @@ export const AuthProvider = ({ children, authAsync }: AuthProviderProps) => {
 
       auth().onAuthStateChanged(setToken);
     });
-  }, [authAsync]);
+  }, []);
 
   const loginWithGoogle = useCallback(async () => {
     startCall();
@@ -87,47 +87,38 @@ export const AuthProvider = ({ children, authAsync }: AuthProviderProps) => {
       .signInWithPopup(provider)
       .then(() => successCall())
       .catch(errorCall);
-  }, [authAsync]);
+  }, []);
 
-  const loginWithFacebook = useCallback(
-    async (scopes?: string[]) => {
-      startCall();
-      const auth = await authAsync();
-      const provider = new auth.FacebookAuthProvider();
+  const loginWithFacebook = useCallback(async (scopes?: string[]) => {
+    startCall();
+    const auth = await authAsync();
+    const provider = new auth.FacebookAuthProvider();
 
-      if (scopes) scopes.forEach((scope) => provider.addScope(scope));
+    if (scopes) scopes.forEach((scope) => provider.addScope(scope));
 
-      auth()
-        .signInWithPopup(provider)
-        .then(() => successCall())
-        .catch(errorCall);
-    },
-    [authAsync]
-  );
+    auth()
+      .signInWithPopup(provider)
+      .then(() => successCall())
+      .catch(errorCall);
+  }, []);
 
-  const loginWithEmailAndPassword = useCallback(
-    async (email: string, password: string) => {
-      const auth = await authAsync();
-      startCall();
-      auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(() => successCall())
-        .catch(errorCall);
-    },
-    [authAsync]
-  );
+  const loginWithEmailAndPassword = useCallback(async (email: string, password: string) => {
+    const auth = await authAsync();
+    startCall();
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => successCall())
+      .catch(errorCall);
+  }, []);
 
-  const signUpWithEmailAndPassword = useCallback(
-    async (email: string, password: string) => {
-      const auth = await authAsync();
-      startCall();
-      auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(() => successCall())
-        .catch(errorCall);
-    },
-    [authAsync]
-  );
+  const signUpWithEmailAndPassword = useCallback(async (email: string, password: string) => {
+    const auth = await authAsync();
+    startCall();
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => successCall())
+      .catch(errorCall);
+  }, []);
 
   const logout = useCallback(async () => {
     const auth = await authAsync();
@@ -136,7 +127,7 @@ export const AuthProvider = ({ children, authAsync }: AuthProviderProps) => {
       .signOut()
       .then(() => successCall())
       .catch(errorCall);
-  }, [authAsync]);
+  }, []);
 
   return (
     <Provider

@@ -1,16 +1,19 @@
 interface FirebaseConfig {
   auth?: boolean;
+  analytics?: boolean;
 }
 
 export const firebaseAsync = async (config?: FirebaseConfig) => {
-  const firebase = await import('firebase/app');
+  const firebase = (await import('firebase/app')).default;
 
   if (config?.auth) await import('firebase/auth');
+  if (config?.analytics) await import('firebase/analytics');
 
   try {
-    firebase.default.initializeApp({
+    firebase.initializeApp({
       apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
       authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+      measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
     });
   } catch (err) {
     // we skip the "already exists" message which is
@@ -19,6 +22,5 @@ export const firebaseAsync = async (config?: FirebaseConfig) => {
       console.error('Firebase initialization error', err.stack);
     }
   }
-
-  return firebase.default;
+  return firebase;
 };

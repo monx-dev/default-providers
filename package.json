@@ -30,12 +30,14 @@
     "eslint": "^7.3.1",
     "firebase": "^8.0.1",
     "husky": "^4.2.5",
+    "react-ga": "^3.2.0",
     "rimraf": "^3.0.2",
     "typescript": "^3.9.3"
   },
   "peerDependencies": {
     "firebase": "^8.0.1",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-ga": "^3.2.0"
   }
 }
