@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/monx-dev/default-providers/compare/v1.1.0...v1.2.0) (2020-11-10)
+
+
+### Features
+
+* added analytics functions event and pageview ([409df59](https://github.com/monx-dev/default-providers/commit/409df592837379615717e2c2405a744c79399cb8))
+
 # [1.1.0](https://github.com/monx-dev/default-providers/compare/v1.0.2...v1.1.0) (2020-11-10)
 
 
