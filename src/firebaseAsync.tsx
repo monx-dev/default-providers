@@ -1,6 +1,7 @@
 interface FirebaseConfig {
   auth?: boolean;
   analytics?: boolean;
+  storage?: boolean;
 }
 
 export const firebaseAsync = async (config?: FirebaseConfig) => {
@@ -8,6 +9,7 @@ export const firebaseAsync = async (config?: FirebaseConfig) => {
 
   if (config?.auth) await import('firebase/auth');
   if (config?.analytics) await import('firebase/analytics');
+  if (config?.storage) await import('firebase/storage');
 
   try {
     firebase.initializeApp({
