@@ -16,6 +16,7 @@ export const firebaseAsync = async (config?: FirebaseConfig) => {
       apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
       authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
       measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
+      storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
     });
   } catch (err) {
     // we skip the "already exists" message which is
