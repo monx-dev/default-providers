@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/monx-dev/default-providers/compare/v1.3.0...v1.3.1) (2020-11-18)
+
+
+### Bug Fixes
+
+* storage bucket ([47b0845](https://github.com/monx-dev/default-providers/commit/47b0845d4d582ff35c3af167e204fd35a19ace0d))
+
 # [1.3.0](https://github.com/monx-dev/default-providers/compare/v1.2.0...v1.3.0) (2020-11-18)
 
 
