@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/monx-dev/default-providers/compare/v1.2.0...v1.3.0) (2020-11-18)
+
+
+### Features
+
+* add firebase storage ([ca0f4b5](https://github.com/monx-dev/default-providers/commit/ca0f4b5931f4c6eb2e2a4b25176a2017f594ec04))
+
 # [1.2.0](https://github.com/monx-dev/default-providers/compare/v1.1.0...v1.2.0) (2020-11-10)
 
 
