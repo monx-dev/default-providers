@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-
+import cookie from 'react-cookies';
 import * as firebase from 'firebase/app';
 
 type User = firebase.default.User;
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children, authAsync }: AuthProviderProps) => {
 
   const setToken = useCallback(async (user: User | null) => {
     if (!user) {
-      document.cookie = '';
+      cookie.remove('token');
       setUser(user);
       setLoading(false);
       return;
@@ -59,9 +59,9 @@ export const AuthProvider = ({ children, authAsync }: AuthProviderProps) => {
     startCall();
 
     user
-      .getIdToken()
+      .getIdToken(true)
       .then((token) => {
-        document.cookie = `token=${token}`;
+        cookie.save('token', token, { path: '/' });
         setUser(user);
         setLoading(false);
       })
