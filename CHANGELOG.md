@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/monx-dev/default-providers/compare/v1.3.1...v1.3.2) (2020-12-06)
+
+
+### Bug Fixes
+
+* tokens ([418b146](https://github.com/monx-dev/default-providers/commit/418b146d9b2517517600a0cf69b2e3cebdaf9edc))
+
 ## [1.3.1](https://github.com/monx-dev/default-providers/compare/v1.3.0...v1.3.1) (2020-11-18)
 
 
